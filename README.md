@@ -32,6 +32,9 @@ deployedContract = VotingContract.new(['Rama','Nick','Jose'],{data: bytecode, fr
 
 //The value for deployedContract.address  maybe 'undefined'. If so you will need to check the output of your Geth node and copy in the address instead:
 contractInstance = VotingContract.at(deployedContract.address)
+
+//For example:
+contractInstance = VotingContract.at("0x57B86A3C54A294aEA34BE51ae9aB798b7176582a")
 ```
 
 ## Interact with the contract via a console
@@ -46,3 +49,11 @@ contractInstance.totalVotesFor.call('Nick')
 ```
 
 ## Interact with the contract via a custom web application using web3.js
+
+Firstly, make sure that you start the Geth node with the `--rpc --rpccorsdomain "*"` switch. 
+
+Also as a good practice in development it's good to pass in `--mine` as well in order to enable mining (otherwise nothing will happen - as in no 'work' will get done!)
+
+Finally, note the `--rpcapi eth,web3,personal` that enables these api endpoints (otherwise calling them via Web3.js will not work)
+
+`geth --datadir=./chaindata --nodiscover --rpc --rpccorsdomain "*" --rpcapi eth,web3,personal --mine`
